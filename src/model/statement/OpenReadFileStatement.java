@@ -14,7 +14,7 @@ public record OpenReadFileStatement(Expression fileNameExpression) implements St
 
     @Override
     public ProgramState execute(ProgramState state) {
-        Value value = fileNameExpression.evaluate(state.symbolTable());
+        Value value = fileNameExpression.evaluate(state.symbolTable(), state.heap());
 
         if (!value.getType().equals(new StringType())) {
             throw new RuntimeException("OpenReadFile: expression is not a string");

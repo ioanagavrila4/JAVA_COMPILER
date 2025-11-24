@@ -10,7 +10,7 @@ public record CloseReadFileStatement(Expression fileNameExpression) implements S
 
     @Override
     public ProgramState execute(ProgramState state) {
-        Value value = fileNameExpression.evaluate(state.symbolTable());
+        Value value = fileNameExpression.evaluate(state.symbolTable(), state.heap());
 
         if (!value.getType().equals(new StringType())) {
             throw new RuntimeException("CloseReadFile: expression is not a string");

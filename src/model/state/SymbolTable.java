@@ -3,6 +3,8 @@ package model.state;
 import model.type.Type;
 import model.value.Value;
 
+import java.util.Collection;
+
 public interface SymbolTable {
     void declareVariable(Type type, String variableName);
 
@@ -13,4 +15,6 @@ public interface SymbolTable {
     void setValue(String variableName, Value value);
 
     boolean isDefined(String variableName);
+
+    Collection<Value> getContent();
 }

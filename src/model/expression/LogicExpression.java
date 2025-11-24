@@ -1,5 +1,6 @@
 package model.expression;
 
+import model.state.Heap;
 import model.state.SymbolTable;
 import model.value.BoolValue;
 import model.value.Value;
@@ -9,9 +10,9 @@ public record LogicExpression(
         String operator) implements Expression {
 
     @Override
-    public Value evaluate(SymbolTable symbolTable) {
-        Value leftValue = first.evaluate(symbolTable);
-        Value rightValue = second.evaluate(symbolTable);
+    public Value evaluate(SymbolTable symbolTable, Heap heap) {
+        Value leftValue = first.evaluate(symbolTable, heap);
+        Value rightValue = second.evaluate(symbolTable, heap);
         if (!(leftValue instanceof BoolValue(boolean leftTerm))) {
             throw new ArithmeticException("Not a bool");
         }

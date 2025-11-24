@@ -10,7 +10,7 @@ public record IfStatement(Expression condition, Statement thenStatement, Stateme
 
     @Override
     public ProgramState execute(ProgramState state) {
-        Value value = condition.evaluate(state.symbolTable());
+        Value value = condition.evaluate(state.symbolTable(), state.heap());
         if (!value.getType().equals(new BooleanType())) {
             throw new RuntimeException("If condition is not boolean");
         }

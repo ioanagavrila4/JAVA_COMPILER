@@ -1,145 +1,4 @@
 ExeStack:
-(string varf;(varf="test.in";(openRFile(varf);(int varc;(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf)))))))))
-SymTable:
-Out:
-FileTable:
-
-ExeStack:
-(varf="test.in";(openRFile(varf);(int varc;(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf))))))))
-string varf
-SymTable:
-Out:
-FileTable:
-
-ExeStack:
-(varf="test.in";(openRFile(varf);(int varc;(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf))))))))
-SymTable:
-varf --> ""
-Out:
-FileTable:
-
-ExeStack:
-(openRFile(varf);(int varc;(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf)))))))
-varf="test.in"
-SymTable:
-varf --> ""
-Out:
-FileTable:
-
-ExeStack:
-(openRFile(varf);(int varc;(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf)))))))
-SymTable:
-varf --> "test.in"
-Out:
-FileTable:
-
-ExeStack:
-(int varc;(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf))))))
-openRFile(varf)
-SymTable:
-varf --> "test.in"
-Out:
-FileTable:
-
-ExeStack:
-(int varc;(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf))))))
-SymTable:
-varf --> "test.in"
-Out:
-FileTable:
-test.in
-
-ExeStack:
-(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf)))))
-int varc
-SymTable:
-varf --> "test.in"
-Out:
-FileTable:
-test.in
-
-ExeStack:
-(readFile(varf,varc);(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf)))))
-SymTable:
-varf --> "test.in"
-varc --> 0
-Out:
-FileTable:
-test.in
-
-ExeStack:
-(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf))))
-readFile(varf,varc)
-SymTable:
-varf --> "test.in"
-varc --> 0
-Out:
-FileTable:
-test.in
-
-ExeStack:
-(print(varc);(readFile(varf,varc);(print(varc);closeRFile(varf))))
-SymTable:
-varf --> "test.in"
-varc --> 15
-Out:
-FileTable:
-test.in
-
-ExeStack:
-(readFile(varf,varc);(print(varc);closeRFile(varf)))
-print(varc)
-SymTable:
-varf --> "test.in"
-varc --> 15
-Out:
-FileTable:
-test.in
-
-ExeStack:
-(readFile(varf,varc);(print(varc);closeRFile(varf)))
-SymTable:
-varf --> "test.in"
-varc --> 15
-Out:
-15
-FileTable:
-test.in
-
-ExeStack:
-(print(varc);closeRFile(varf))
-readFile(varf,varc)
-SymTable:
-varf --> "test.in"
-varc --> 15
-Out:
-15
-FileTable:
-test.in
-
-ExeStack:
-(print(varc);closeRFile(varf))
-SymTable:
-varf --> "test.in"
-varc --> 50
-Out:
-15
-FileTable:
-test.in
-
-ExeStack:
-closeRFile(varf)
-print(varc)
-SymTable:
-varf --> "test.in"
-varc --> 50
-Out:
-15
-FileTable:
-test.in
-
-ExeStack:
-closeRFile(varf)
 SymTable:
 varf --> "test.in"
 varc --> 50
@@ -147,7 +6,24 @@ Out:
 15
 50
 FileTable:
-test.in
+
+ExeStack:
+SymTable:
+varf --> "test.in"
+varc --> 50
+Out:
+15
+50
+FileTable:
+
+ExeStack:
+SymTable:
+varf --> "test.in"
+varc --> 50
+Out:
+15
+50
+FileTable:
 
 ExeStack:
 SymTable:
@@ -281,7 +157,7 @@ ExeStack:
 (print(varc);closeRFile(varf))
 SymTable:
 varf --> "test.in"
-varc --> 50
+varc --> 2
 Out:
 15
 FileTable:
@@ -292,7 +168,7 @@ closeRFile(varf)
 print(varc)
 SymTable:
 varf --> "test.in"
-varc --> 50
+varc --> 2
 Out:
 15
 FileTable:
@@ -302,19 +178,19 @@ ExeStack:
 closeRFile(varf)
 SymTable:
 varf --> "test.in"
-varc --> 50
+varc --> 2
 Out:
 15
-50
+2
 FileTable:
 test.in
 
 ExeStack:
 SymTable:
 varf --> "test.in"
-varc --> 50
+varc --> 2
 Out:
 15
-50
+2
 FileTable:
 

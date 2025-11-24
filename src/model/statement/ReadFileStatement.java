@@ -23,7 +23,7 @@ public record ReadFileStatement(Expression fileNameExpression, String variableNa
             throw new RuntimeException("ReadFile: variable " + variableName + " is not of type int");
         }
 
-        Value value = fileNameExpression.evaluate(state.symbolTable());
+        Value value = fileNameExpression.evaluate(state.symbolTable(), state.heap());
 
         if (!value.getType().equals(new StringType())) {
             throw new RuntimeException("ReadFile: expression is not a string");

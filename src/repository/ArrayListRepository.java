@@ -53,6 +53,9 @@ public class ArrayListRepository implements Repository{
             logFile.println("FileTable:");
             logFile.print(state.fileTable().toString());
 
+            logFile.println("Heap:");
+            logFile.print(state.heap().toString());
+
             logFile.println();
         } catch (IOException e) {
             throw new MyException("Error writing to log file: " + e.getMessage());

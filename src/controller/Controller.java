@@ -3,7 +3,12 @@ package controller;
 import exceptions.MyException;
 import model.state.*;
 import model.statement.Statement;
+import model.value.RefValue;
+import model.value.Value;
 import repository.Repository;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 //record = ii o clasa mai speciala care face immutable data - are automat metode gen equals, hashCode etc
 
@@ -16,7 +21,8 @@ public record Controller(Repository repository) {
                 executionStack,
                 new MapSymbolTable(),
                 new ArrayListOut(),
-                new MapFileTable()
+                new MapFileTable(),
+                new MapHeap()
         ));
     }
 
@@ -29,6 +35,13 @@ public record Controller(Repository repository) {
         repository.logPrgStateExec();
         while (!state.executionStack().isEmpty()) {
             state = executeOneStep(state);
+            // Run garbage collector after each step
+            state.heap().setContent(
+                safeGarbageCollector(
+                    getAddrFromSymTable(state.symbolTable().getContent()),
+                    state.heap().getContent()
+                )
+            );
             repository.logPrgStateExec();
             model.state.IO.println(state);
         }
@@ -42,5 +55,65 @@ public record Controller(Repository repository) {
 
         Statement nextStatement = executionStack.pop();
         return nextStatement.execute(state);
+    }
+
+    // Garbage Collector helper methods
+
+    /**
+     * Extracts all addresses from RefValues in the SymbolTable
+     */
+    private List<Integer> getAddrFromSymTable(Collection<Value> symTableValues) {
+        return symTableValues.stream()
+                .filter(v -> v instanceof RefValue)
+                .map(v -> {
+                    RefValue v1 = (RefValue) v;
+                    return v1.getAddr();
+                })
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Extracts all addresses from RefValues in the Heap
+     */
+    private List<Integer> getAddrFromHeap(Collection<Value> heapValues) {
+        return heapValues.stream()
+                .filter(v -> v instanceof RefValue)
+                .map(v -> {
+                    RefValue v1 = (RefValue) v;
+                    return v1.getAddr();
+                })
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Safe garbage collector that considers references from both SymTable and Heap
+     */
+    private Map<Integer, Value> safeGarbageCollector(List<Integer> symTableAddr, Map<Integer, Value> heap) {
+        // Start with addresses from SymTable
+        Set<Integer> reachableAddresses = new HashSet<>(symTableAddr);
+
+        // Keep adding addresses from heap values until no new addresses are found
+        boolean changed = true;
+        while (changed) {
+            changed = false;
+            List<Integer> heapAddresses = getAddrFromHeap(
+                heap.entrySet().stream()
+                    .filter(e -> reachableAddresses.contains(e.getKey()))
+                    .map(Map.Entry::getValue)
+                    .collect(Collectors.toList())
+            );
+
+            for (Integer addr : heapAddresses) {
+                if (!reachableAddresses.contains(addr)) {
+                    reachableAddresses.add(addr);
+                    changed = true;
+                }
+            }
+        }
+
+        // Return only the reachable heap entries
+        return heap.entrySet().stream()
+                .filter(e -> reachableAddresses.contains(e.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

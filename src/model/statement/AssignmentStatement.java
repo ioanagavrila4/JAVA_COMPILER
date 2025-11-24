@@ -7,7 +7,7 @@ public record AssignmentStatement(String variableName, Expression expression) im
 
     @Override
     public ProgramState execute(ProgramState state) {
-        var value = expression.evaluate(state.symbolTable());
+        var value = expression.evaluate(state.symbolTable(), state.heap());
         var expressionType = value.getType();
         var variableType = state.symbolTable().getVariableType(variableName);
         if (!expressionType.equals(variableType)) {

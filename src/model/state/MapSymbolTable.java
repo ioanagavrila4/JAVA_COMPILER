@@ -35,6 +35,11 @@ public class MapSymbolTable implements SymbolTable{
     }
 
     @Override
+    public java.util.Collection<Value> getContent() {
+        return symbolTable.values();
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Value> entry : symbolTable.entrySet()) {

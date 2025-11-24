@@ -1,5 +1,6 @@
 package model.expression;
 
+import model.state.Heap;
 import model.state.SymbolTable;
 import model.value.IntValue;
 import model.value.Value;
@@ -9,9 +10,9 @@ public record ArithmeticExpression(
         implements Expression {
 
     @Override
-    public Value evaluate(SymbolTable symbolTable) {
-        Value leftValue = left.evaluate(symbolTable);
-        Value rightValue = right.evaluate(symbolTable);
+    public Value evaluate(SymbolTable symbolTable, Heap heap) {
+        Value leftValue = left.evaluate(symbolTable, heap);
+        Value rightValue = right.evaluate(symbolTable, heap);
         if (!(leftValue instanceof IntValue(int leftTerm))) {
             throw new ArithmeticException("Not an integer");
         }
