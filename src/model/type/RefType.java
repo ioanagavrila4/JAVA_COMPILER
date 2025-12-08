@@ -23,6 +23,7 @@ public class RefType extends Type {
     public Value defaultValue() {
         return new RefValue(0, inner);
     }
+//de rescris functia cu dublu if fara o variabila noua
 
     @Override
     public boolean equals(Object another) {

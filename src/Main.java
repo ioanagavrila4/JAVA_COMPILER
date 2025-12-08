@@ -207,6 +207,59 @@ void main() {
     Controller ctr9 = new Controller(repo9);
     ctr9.addNewProgram(ex9);
 
+    // Example 10: Demonstrație clară Garbage Collector - arată cum se șterg adresele nefolosite
+    // Creăm mai multe obiecte în heap și apoi le facem inaccesibile pentru a vedea GC în acțiune
+    // Ref int a; new(a,10); Ref int b; new(b,20); Ref int c; new(c,30);
+    // print("Adrese alocate initial:"); print(a); print(b); print(c);
+    // a=b; // Adresa 1 (valoarea 10) devine inaccesibilă și va fi ștearsă de GC
+    // c=null; // Adresa 3 (valoarea 30) devine inaccesibilă și va fi ștearsă de GC
+    // new(b,40); // Adresa 2 (valoarea 20) devine inaccesibilă când b primește o nouă adresă
+    // print("Adrese după modificări:"); print(a); print(b); print(c);
+    // După GC, adresele 1, 2 și 3 vor fi șterse din heap
+    //heap allocate aici
+    Statement ex10 = new CompoundStatement(
+            new VariableDeclarationStatement(new RefType(new IntegerType()), "a"),
+            new CompoundStatement(
+                    new NewStatement("a", new ValueExpression(new IntValue(10))),
+                    new CompoundStatement(
+                            new VariableDeclarationStatement(new RefType(new IntegerType()), "b"),
+                            new CompoundStatement(
+                                    new NewStatement("b", new ValueExpression(new IntValue(20))),
+                                    new CompoundStatement(
+                                            new VariableDeclarationStatement(new RefType(new IntegerType()), "c"),
+                                            new CompoundStatement(
+                                                    new NewStatement("c", new ValueExpression(new IntValue(30))),
+                                                    new CompoundStatement(
+                                                            new PrintStatement(new ValueExpression(new StringValue("Heap initial cu 3 adrese alocate:"))),
+                                                            new CompoundStatement(
+                                                                    new PrintStatement(new VariableExpression("a")),
+                                                                    new CompoundStatement(
+                                                                            new PrintStatement(new VariableExpression("b")),
+                                                                            new CompoundStatement(
+                                                                                    new PrintStatement(new VariableExpression("c")),
+                                                                                    new CompoundStatement(
+                                                                                            new AssignmentStatement("a", new VariableExpression("b")),
+                                                                                            new CompoundStatement(
+                                                                                                    new PrintStatement(new ValueExpression(new StringValue("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"))),
+                                                                                                    new CompoundStatement(
+                                                                                                            new NewStatement("b", new ValueExpression(new IntValue(40))),
+                                                                                                            new CompoundStatement(
+                                                                                                                    new PrintStatement(new ValueExpression(new StringValue("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"))),
+                                                                                                                    new CompoundStatement(
+                                                                                                                            new PrintStatement(new ValueExpression(new StringValue("Heap final dupa GC va sterge adresele 1 si 2:"))),
+                                                                                                                            new CompoundStatement(
+                                                                                                                                    new PrintStatement(new VariableExpression("a")),
+                                                                                                                                    new CompoundStatement(
+                                                                                                                                            new PrintStatement(new VariableExpression("b")),
+                                                                                                                                            new PrintStatement(new VariableExpression("c")))))))))))))))))));
+
+    ArrayListRepository repo10 = new ArrayListRepository("log10.txt");
+    Controller ctr10 = new Controller(repo10);
+    ctr10.addNewProgram(ex10);
+
+    
+    
+
     TextMenu menu = new TextMenu();
     menu.addCommand(new ExitCommand("0", "exit"));
     menu.addCommand(new RunExampleCommand("1", ex1.toString(), ctr1));
@@ -218,5 +271,6 @@ void main() {
     menu.addCommand(new RunExampleCommand("7", ex7.toString(), ctr7));
     menu.addCommand(new RunExampleCommand("8", ex8.toString(), ctr8));
     menu.addCommand(new RunExampleCommand("9", ex9.toString(), ctr9));
+    menu.addCommand(new RunExampleCommand("10", "Garbage Collector Demo - sterge adrese nefolosite", ctr10));
     menu.show();
 }

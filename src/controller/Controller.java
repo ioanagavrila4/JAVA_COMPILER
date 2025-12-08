@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 //record = ii o clasa mai speciala care face immutable data - are automat metode gen equals, hashCode etc
-
+//o clasa separat in pentru alocare - inainte alocare propriu zisa - verificare referinta variabila
 public record Controller(Repository repository) {
     public void addNewProgram(Statement program) {
         var executionStack = new LinkedListExecutionStack();
@@ -85,9 +85,10 @@ public record Controller(Repository repository) {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Safe garbage collector that considers references from both SymTable and Heap
-     */
+   //Pornește cu adresele direct accesibile din SymbolTable
+//Pentru fiecare adresă accesibilă, verifică dacă valoarea din heap conține alte referințe
+//Adaugă noile referințe găsite la setul de adrese accesibile
+//Repetă până când nu mai găsește referințe noi
     private Map<Integer, Value> safeGarbageCollector(List<Integer> symTableAddr, Map<Integer, Value> heap) {
         // Start with addresses from SymTable
         Set<Integer> reachableAddresses = new HashSet<>(symTableAddr);

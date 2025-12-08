@@ -1,0 +1,1289 @@
+ExeStack:
+(ref(int) a;(new(a, 10);(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+ExeStack:
+(new(a, 10);(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))))))
+ref(int) a
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+ExeStack:
+(new(a, 10);(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))))))
+SymTable:
+a --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+ExeStack:
+(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))))
+new(a, 10)
+SymTable:
+a --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+ExeStack:
+(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))))
+SymTable:
+a --> (1, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+
+ExeStack:
+(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))))
+ref(int) b
+SymTable:
+a --> (1, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+
+ExeStack:
+(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))))
+SymTable:
+a --> (1, int)
+b --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+
+ExeStack:
+(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))
+new(b, 20)
+SymTable:
+a --> (1, int)
+b --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+
+ExeStack:
+(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+
+ExeStack:
+(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))
+ref(int) c
+SymTable:
+a --> (1, int)
+b --> (2, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+
+ExeStack:
+(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+
+ExeStack:
+(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))
+new(c, 30)
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+
+ExeStack:
+(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))
+print("Heap initial cu 3 adrese alocate:")
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))
+print(a)
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))
+print(b)
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))
+print(c)
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))
+a=b
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))
+SymTable:
+a --> (2, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))
+print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila")
+SymTable:
+a --> (2, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))
+SymTable:
+a --> (2, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))
+new(b, 40)
+SymTable:
+a --> (2, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))
+print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila")
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print(a);(print(b);print(c)))
+print("Heap final dupa GC va sterge adresele 1 si 2:")
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print(a);(print(b);print(c)))
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print(b);print(c))
+print(a)
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print(b);print(c))
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+print(c)
+print(b)
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+print(c)
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(ref(int) a;(new(a, 10);(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+ExeStack:
+(new(a, 10);(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))))))
+ref(int) a
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+ExeStack:
+(new(a, 10);(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))))))
+SymTable:
+a --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+ExeStack:
+(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))))
+new(a, 10)
+SymTable:
+a --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+ExeStack:
+(ref(int) b;(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))))
+SymTable:
+a --> (1, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+
+ExeStack:
+(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))))
+ref(int) b
+SymTable:
+a --> (1, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+
+ExeStack:
+(new(b, 20);(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))))
+SymTable:
+a --> (1, int)
+b --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+
+ExeStack:
+(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))
+new(b, 20)
+SymTable:
+a --> (1, int)
+b --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+
+ExeStack:
+(ref(int) c;(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+
+ExeStack:
+(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))
+ref(int) c
+SymTable:
+a --> (1, int)
+b --> (2, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+
+ExeStack:
+(new(c, 30);(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+
+ExeStack:
+(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))
+new(c, 30)
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+
+ExeStack:
+(print("Heap initial cu 3 adrese alocate:");(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))
+print("Heap initial cu 3 adrese alocate:")
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(a);(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))
+print(a)
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(b);(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))
+print(b)
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print(c);(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))
+print(c)
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(a=b;(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))))
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))
+a=b
+SymTable:
+a --> (1, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  1 -> 10
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila");(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))))
+SymTable:
+a --> (2, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))
+print("Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila")
+SymTable:
+a --> (2, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(new(b, 40);(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))))
+SymTable:
+a --> (2, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))
+new(b, 40)
+SymTable:
+a --> (2, int)
+b --> (2, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+
+ExeStack:
+(print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila");(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c)))))
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))
+print("Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila")
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print("Heap final dupa GC va sterge adresele 1 si 2:");(print(a);(print(b);print(c))))
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print(a);(print(b);print(c)))
+print("Heap final dupa GC va sterge adresele 1 si 2:")
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print(a);(print(b);print(c)))
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print(b);print(c))
+print(a)
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+(print(b);print(c))
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+print(c)
+print(b)
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+print(c)
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
+ExeStack:
+SymTable:
+a --> (2, int)
+b --> (4, int)
+c --> (3, int)
+Out:
+"Heap initial cu 3 adrese alocate:"
+(1, int)
+(2, int)
+(3, int)
+"Dupa a=b, adresa initiala a lui a (addr:1 val:10) devine inaccesibila"
+"Dupa new(b,40), adresa initiala a lui b (addr:2 val:20) devine inaccesibila"
+"Heap final dupa GC va sterge adresele 1 si 2:"
+(2, int)
+(4, int)
+(3, int)
+FileTable:
+Heap:
+Heap:
+  2 -> 20
+  3 -> 30
+  4 -> 40
+
