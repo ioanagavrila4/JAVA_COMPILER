@@ -9,7 +9,7 @@ public record VariableDeclarationStatement(Type type, String variableName) imple
     public ProgramState execute(ProgramState state) {
         var symbolTable = state.symbolTable();
         symbolTable.declareVariable(type, variableName);
-        return state;
+        return null;
     }
 
     @Override

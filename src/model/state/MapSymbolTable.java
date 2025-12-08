@@ -7,7 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapSymbolTable implements SymbolTable{
-    private final Map<String, Value> symbolTable = new HashMap<>();
+    private final Map<String, Value> symbolTable;
+
+    public MapSymbolTable() {
+        this.symbolTable = new HashMap<>();
+    }
+
+    // Private constructor for deep copy
+    private MapSymbolTable(Map<String, Value> symbolTable) {
+        this.symbolTable = new HashMap<>(symbolTable);
+    }
 
     @Override
     public void declareVariable(Type type, String variableName) {
@@ -37,6 +46,16 @@ public class MapSymbolTable implements SymbolTable{
     @Override
     public java.util.Collection<Value> getContent() {
         return symbolTable.values();
+    }
+
+    @Override
+    public SymbolTable deepCopy() {
+        return new MapSymbolTable(this.symbolTable);
+    }
+
+    @Override
+    public Map<String, Value> getContentMap() {
+        return new HashMap<>(symbolTable);
     }
 
     @Override

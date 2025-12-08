@@ -40,7 +40,7 @@ public record NewStatement(String varName, Expression expression) implements Sta
         RefValue newRefValue = new RefValue(newAddress, refType.getInner());
         state.symbolTable().setValue(varName, newRefValue);
 
-        return state;
+        return null;
     }
 
     @Override

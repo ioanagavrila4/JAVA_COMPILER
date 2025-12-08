@@ -33,7 +33,7 @@ public record OpenReadFileStatement(Expression fileNameExpression) implements St
             throw new RuntimeException("OpenReadFile: error opening file " + fileName.getVal() + ": " + e.getMessage());
         }
 
-        return state;
+        return null;
     }
 
     @Override

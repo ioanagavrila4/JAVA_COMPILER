@@ -14,7 +14,7 @@ public record AssignmentStatement(String variableName, Expression expression) im
             throw new RuntimeException("Different types");
         }
         state.symbolTable().setValue(variableName, value);
-        return state;
+        return null;
     }
 
     @Override

@@ -24,7 +24,7 @@ public record CloseReadFileStatement(Expression fileNameExpression) implements S
 
         state.fileTable().closeFile(fileName);
 
-        return state;
+        return null;
     }
 
     @Override

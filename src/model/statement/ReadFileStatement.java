@@ -52,7 +52,7 @@ public record ReadFileStatement(Expression fileNameExpression, String variableNa
             throw new RuntimeException("ReadFile: invalid number format in file " + fileName.getVal());
         }
 
-        return state;
+        return null;
     }
 
     @Override

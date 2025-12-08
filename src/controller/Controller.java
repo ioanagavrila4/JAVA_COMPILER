@@ -8,11 +8,20 @@ import model.value.Value;
 import repository.Repository;
 
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-//record = ii o clasa mai speciala care face immutable data - are automat metode gen equals, hashCode etc
-//o clasa separat in pentru alocare - inainte alocare propriu zisa - verificare referinta variabila
-public record Controller(Repository repository) {
+public class Controller {
+    private final Repository repository;
+    private ExecutorService executor;
+
+    public Controller(Repository repository) {
+        this.repository = repository;
+    }
+
     public void addNewProgram(Statement program) {
         var executionStack = new LinkedListExecutionStack();
         executionStack.push(program);
@@ -27,68 +36,144 @@ public record Controller(Repository repository) {
     }
 
     public void displayCurrentState() {
-        model.state.IO.println(repository.getCurrentState());
+        List<ProgramState> prgList = repository.getPrgList();
+        if (!prgList.isEmpty()) {
+            model.state.IO.println(prgList.get(0));
+        }
     }
 
+    // Remove completed programs from the list
+    private List<ProgramState> removeCompletedPrg(List<ProgramState> inPrgList) {
+        return inPrgList.stream()
+                .filter(ProgramState::isNotCompleted)
+                .collect(Collectors.toList());
+    }
+
+    // Execute one step for all programs concurrently
+    private void oneStepForAllPrg(List<ProgramState> prgList) throws MyException {
+        // Before execution, print the PrgState List into the log file
+        prgList.forEach(prg -> {
+            try {
+                repository.logPrgStateExec(prg);
+            } catch (MyException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Prepare the list of callables
+        List<Callable<ProgramState>> callList = prgList.stream()
+                .map((ProgramState p) -> (Callable<ProgramState>) (() -> {
+                    try {
+                        return p.oneStep();
+                    } catch (MyException e) {
+                        System.err.println("Error in thread " + p.getId() + ": " + e.getMessage());
+                        return null;
+                    }
+                }))
+                .collect(Collectors.toList());
+
+        // Start the execution of the callables
+        // It returns the list of new created PrgStates (namely threads)
+        List<ProgramState> newPrgList;
+        try {
+            newPrgList = executor.invokeAll(callList).stream()
+                    .map(future -> {
+                        try {
+                            return future.get();
+                        } catch (InterruptedException | ExecutionException e) {
+                            System.err.println("Error getting future result: " + e.getMessage());
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        } catch (InterruptedException e) {
+            throw new MyException("Executor interrupted: " + e.getMessage());
+        }
+
+        // Add the new created threads to the list of existing threads
+        prgList.addAll(newPrgList);
+
+        // After execution, print the PrgState List into the log file
+        prgList.forEach(prg -> {
+            try {
+                repository.logPrgStateExec(prg);
+            } catch (MyException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Save the current programs in the repository
+        repository.setPrgList(prgList);
+    }
+
+    // New allStep method for concurrent execution
+    public void allStep() throws MyException {
+        executor = Executors.newFixedThreadPool(2);
+
+        // Remove the completed programs
+        List<ProgramState> prgList = removeCompletedPrg(repository.getPrgList());
+
+        while (prgList.size() > 0) {
+            // Call conservative garbage collector before each step
+            conservativeGarbageCollector(prgList);
+
+            // Execute one step for all programs
+            oneStepForAllPrg(prgList);
+
+            // Remove the completed programs
+            prgList = removeCompletedPrg(repository.getPrgList());
+        }
+
+        executor.shutdownNow();
+
+        // Update the repository state
+        repository.setPrgList(prgList);
+    }
+
+    // Old method for backwards compatibility - executes sequentially
     public void executeAllSteps() throws MyException {
-        var state = repository.getCurrentState();
-        repository.logPrgStateExec();
-        while (!state.executionStack().isEmpty()) {
-            state = executeOneStep(state);
-            // Run garbage collector after each step
-            state.heap().setContent(
-                safeGarbageCollector(
-                    getAddrFromSymTable(state.symbolTable().getContent()),
-                    state.heap().getContent()
-                )
-            );
-            repository.logPrgStateExec();
-            model.state.IO.println(state);
-        }
+        allStep();
     }
 
-    private ProgramState executeOneStep(ProgramState state) {
-        ExecutionStack executionStack = state.executionStack();
-        if (executionStack.isEmpty()) {
-            throw new RuntimeException("Execution stack is empty");
-        }
+    // Conservative garbage collector that works with multiple program states
+    private void conservativeGarbageCollector(List<ProgramState> prgList) {
+        if (prgList.isEmpty()) return;
 
-        Statement nextStatement = executionStack.pop();
-        return nextStatement.execute(state);
+        // Get all addresses from all symbol tables
+        List<Integer> symTableAddresses = prgList.stream()
+                .map(p -> getAddrFromSymTable(p.symbolTable().getContent()))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        // Get the shared heap (all programs share the same heap)
+        Heap heap = prgList.get(0).heap();
+        Map<Integer, Value> heapContent = heap.getContent();
+
+        // Apply safe garbage collector
+        Map<Integer, Value> newHeap = safeGarbageCollector(symTableAddresses, heapContent);
+
+        // Update the heap
+        heap.setContent(newHeap);
     }
 
-    // Garbage Collector helper methods
-
-    /**
-     * Extracts all addresses from RefValues in the SymbolTable
-     */
+    // Extracts all addresses from RefValues in the SymbolTable
     private List<Integer> getAddrFromSymTable(Collection<Value> symTableValues) {
         return symTableValues.stream()
                 .filter(v -> v instanceof RefValue)
-                .map(v -> {
-                    RefValue v1 = (RefValue) v;
-                    return v1.getAddr();
-                })
+                .map(v -> ((RefValue) v).getAddr())
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Extracts all addresses from RefValues in the Heap
-     */
+    // Extracts all addresses from RefValues in the Heap
     private List<Integer> getAddrFromHeap(Collection<Value> heapValues) {
         return heapValues.stream()
                 .filter(v -> v instanceof RefValue)
-                .map(v -> {
-                    RefValue v1 = (RefValue) v;
-                    return v1.getAddr();
-                })
+                .map(v -> ((RefValue) v).getAddr())
                 .collect(Collectors.toList());
     }
 
-   //Pornește cu adresele direct accesibile din SymbolTable
-//Pentru fiecare adresă accesibilă, verifică dacă valoarea din heap conține alte referințe
-//Adaugă noile referințe găsite la setul de adrese accesibile
-//Repetă până când nu mai găsește referințe noi
+    // Safe garbage collector implementation
     private Map<Integer, Value> safeGarbageCollector(List<Integer> symTableAddr, Map<Integer, Value> heap) {
         // Start with addresses from SymTable
         Set<Integer> reachableAddresses = new HashSet<>(symTableAddr);

@@ -257,8 +257,34 @@ void main() {
     Controller ctr10 = new Controller(repo10);
     ctr10.addNewProgram(ex10);
 
-    
-    
+    // Example 11: Fork statement - concurrent execution
+    // int v; Ref int a; v=10; new(a,22);
+    // fork(wH(a,30); v=32; print(v); print(rH(a)));
+    // print(v); print(rH(a))
+    Statement ex11 = new CompoundStatement(
+            new VariableDeclarationStatement(new IntegerType(), "v"),
+            new CompoundStatement(
+                    new VariableDeclarationStatement(new RefType(new IntegerType()), "a"),
+                    new CompoundStatement(
+                            new AssignmentStatement("v", new ValueExpression(new IntValue(10))),
+                            new CompoundStatement(
+                                    new NewStatement("a", new ValueExpression(new IntValue(22))),
+                                    new CompoundStatement(
+                                            new ForkStatement(
+                                                    new CompoundStatement(
+                                                            new WriteHeapStatement("a", new ValueExpression(new IntValue(30))),
+                                                            new CompoundStatement(
+                                                                    new AssignmentStatement("v", new ValueExpression(new IntValue(32))),
+                                                                    new CompoundStatement(
+                                                                            new PrintStatement(new VariableExpression("v")),
+                                                                            new PrintStatement(new ReadHeapExpression(new VariableExpression("a"))))))),
+                                            new CompoundStatement(
+                                                    new PrintStatement(new VariableExpression("v")),
+                                                    new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))))))));
+
+    ArrayListRepository repo11 = new ArrayListRepository("log11.txt");
+    Controller ctr11 = new Controller(repo11);
+    ctr11.addNewProgram(ex11);
 
     TextMenu menu = new TextMenu();
     menu.addCommand(new ExitCommand("0", "exit"));
@@ -272,5 +298,6 @@ void main() {
     menu.addCommand(new RunExampleCommand("8", ex8.toString(), ctr8));
     menu.addCommand(new RunExampleCommand("9", ex9.toString(), ctr9));
     menu.addCommand(new RunExampleCommand("10", "Garbage Collector Demo - sterge adrese nefolosite", ctr10));
+    menu.addCommand(new RunExampleCommand("11", "Fork example - concurrent execution", ctr11));
     menu.show();
 }

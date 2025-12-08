@@ -24,7 +24,7 @@ public record WhileStatement(Expression condition, Statement body) implements St
         }
         // If condition is false, do nothing (while loop ends)
 
-        return state;
+        return null;
     }
 
     @Override

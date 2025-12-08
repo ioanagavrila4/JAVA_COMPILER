@@ -10,7 +10,7 @@ public record CompoundStatement(Statement first, Statement second) implements St
         ExecutionStack executionStack = state.executionStack();
         executionStack.push(this.second);
         executionStack.push(this.first);
-        return state;
+        return null;
     }
 
     @Override

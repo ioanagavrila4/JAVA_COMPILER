@@ -220,3 +220,114 @@ Heap:
 Heap:
   (empty)
 
+Id=1
+ExeStack:
+(int v;(v=2;print(v)))
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(v=2;print(v))
+int v
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(v=2;print(v))
+int v
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(v=2;print(v))
+SymTable:
+v --> 0
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(v=2;print(v))
+SymTable:
+v --> 0
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+print(v)
+v=2
+SymTable:
+v --> 0
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+print(v)
+v=2
+SymTable:
+v --> 0
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+print(v)
+SymTable:
+v --> 2
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+print(v)
+SymTable:
+v --> 2
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+SymTable:
+v --> 2
+Out:
+2
+FileTable:
+Heap:
+Heap:
+  (empty)
+

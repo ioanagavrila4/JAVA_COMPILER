@@ -19,7 +19,7 @@ public record IfStatement(Expression condition, Statement thenStatement, Stateme
         Statement chosenStatement = booleanValue.value() ?
                 thenStatement : elseStatement;
         state.executionStack().push(chosenStatement);
-        return state;
+        return null;
     }
 
     @Override

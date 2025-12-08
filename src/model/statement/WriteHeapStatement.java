@@ -44,7 +44,7 @@ public record WriteHeapStatement(String varName, Expression expression) implemen
         // Update heap at address
         state.heap().update(address, expressionValue);
 
-        return state;
+        return null;
     }
 
     @Override

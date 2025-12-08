@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayListRepository implements Repository{
-    private final List<ProgramState> programStates = new ArrayList<>();
+    private List<ProgramState> programStates = new ArrayList<>();
     private final String logFilePath;
 
     public ArrayListRepository(String logFilePath) {
@@ -25,14 +25,20 @@ public class ArrayListRepository implements Repository{
     }
 
     @Override
-    public ProgramState getCurrentState() {
-        return programStates.getFirst();
+    public List<ProgramState> getPrgList() {
+        return programStates;
     }
 
     @Override
-    public void logPrgStateExec() throws MyException {
-        ProgramState state = getCurrentState();
+    public void setPrgList(List<ProgramState> prgList) {
+        this.programStates = prgList;
+    }
+
+    @Override
+    public void logPrgStateExec(ProgramState state) throws MyException {
         try (PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)))) {
+            logFile.println("Id=" + state.getId());
+
             logFile.println("ExeStack:");
             List<Statement> stackContents = new ArrayList<>();
             var stack = state.executionStack();
