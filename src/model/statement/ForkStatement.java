@@ -1,6 +1,9 @@
 package model.statement;
 
+import exceptions.MyException;
 import model.state.*;
+import model.type.Type;
+import model.utils.MyIDictionary;
 
 public class ForkStatement implements Statement {
     private final Statement statement;
@@ -18,10 +21,8 @@ public class ForkStatement implements Statement {
         // Clone the symbol table for the new thread
         SymbolTable newSymTable = state.symbolTable().deepCopy();
 
-        // Create the new ProgramState (thread) with:
-        // - New execution stack containing the fork statement
+
         // - Cloned symbol table (not shared)
-        // - Shared heap, file table, and output (references to parent's)
         ProgramState newPrgState = new ProgramState(
             newStack,
             newSymTable,
@@ -32,6 +33,12 @@ public class ForkStatement implements Statement {
 
         // Return the new created PrgState
         return newPrgState;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        statement.typecheck(typeEnv.clone());
+        return typeEnv;
     }
 
     @Override

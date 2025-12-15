@@ -1,7 +1,11 @@
 package model.statement;
 
+import exceptions.MyException;
 import model.expression.Expression;
 import model.state.ProgramState;
+import model.type.BooleanType;
+import model.type.Type;
+import model.utils.MyIDictionary;
 import model.value.BoolValue;
 import model.value.Value;
 
@@ -25,6 +29,17 @@ public record WhileStatement(Expression condition, Statement body) implements St
         // If condition is false, do nothing (while loop ends)
 
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typexp = condition.typecheck(typeEnv);
+        if (typexp.equals(new BooleanType())) {
+            body.typecheck(typeEnv.clone());
+            return typeEnv;
+        } else {
+            throw new MyException("The condition of WHILE has not the type bool");
+        }
     }
 
     @Override

@@ -1,4 +1,5 @@
 import controller.Controller;
+import exceptions.MyException;
 import model.expression.*;
 import model.statement.*;
 import model.type.BooleanType;
@@ -23,7 +24,11 @@ void main() {
 
     ArrayListRepository repo1 = new ArrayListRepository("log1.txt");
     Controller ctr1 = new Controller(repo1);
-    ctr1.addNewProgram(ex1);
+    try {
+        ctr1.addNewProgram(ex1);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 1: " + e.getMessage());
+    }
 
     // Example 2: int a; a=2+3*5; int b; b=a-4/2+7; Print(b)
     Statement ex2 = new CompoundStatement(
@@ -55,7 +60,11 @@ void main() {
 
     ArrayListRepository repo2 = new ArrayListRepository("log2.txt");
     Controller ctr2 = new Controller(repo2);
-    ctr2.addNewProgram(ex2);
+    try {
+        ctr2.addNewProgram(ex2);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 2: " + e.getMessage());
+    }
 
     // Example 3: bool a; a=false; int v; If a Then v=2 Else v=3; Print(v)
     Statement ex3 = new CompoundStatement(
@@ -73,7 +82,11 @@ void main() {
 
     ArrayListRepository repo3 = new ArrayListRepository("log3.txt");
     Controller ctr3 = new Controller(repo3);
-    ctr3.addNewProgram(ex3);
+    try {
+        ctr3.addNewProgram(ex3);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 3: " + e.getMessage());
+    }
 
     // Example 4: File operations example
     // string varf; varf="test.in"; openRFile(varf); int varc;
@@ -98,7 +111,11 @@ void main() {
 
     ArrayListRepository repo4 = new ArrayListRepository("log4.txt");
     Controller ctr4 = new Controller(repo4);
-    ctr4.addNewProgram(ex4);
+    try {
+        ctr4.addNewProgram(ex4);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 4: " + e.getMessage());
+    }
 
     // Example 5: Heap allocation and reading
     // Ref int v; new(v,20); Ref Ref int a; new(a,v); print(rH(v)); print(rH(rH(a))+5)
@@ -119,7 +136,11 @@ void main() {
 
     ArrayListRepository repo5 = new ArrayListRepository("log5.txt");
     Controller ctr5 = new Controller(repo5);
-    ctr5.addNewProgram(ex5);
+    try {
+        ctr5.addNewProgram(ex5);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 5: " + e.getMessage());
+    }
 
     // Example 6: Heap writing
     // Ref int v; new(v,20); print(rH(v)); wH(v,30); print(rH(v)+5)
@@ -138,7 +159,11 @@ void main() {
 
     ArrayListRepository repo6 = new ArrayListRepository("log6.txt");
     Controller ctr6 = new Controller(repo6);
-    ctr6.addNewProgram(ex6);
+    try {
+        ctr6.addNewProgram(ex6);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 6: " + e.getMessage());
+    }
 
     // Example 7: While statement
     // int v; v=4; (while (v>0) print(v); v=v-1); print(v)
@@ -159,7 +184,11 @@ void main() {
 
     ArrayListRepository repo7 = new ArrayListRepository("log7.txt");
     Controller ctr7 = new Controller(repo7);
-    ctr7.addNewProgram(ex7);
+    try {
+        ctr7.addNewProgram(ex7);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 7: " + e.getMessage());
+    }
 
     // Example 8: Garbage collector test with nested heap references
     // Ref int v; new(v,20); Ref Ref int a; new(a,v); new(v,30); print(rH(rH(a)))
@@ -177,7 +206,11 @@ void main() {
 
     ArrayListRepository repo8 = new ArrayListRepository("log8.txt");
     Controller ctr8 = new Controller(repo8);
-    ctr8.addNewProgram(ex8);
+    try {
+        ctr8.addNewProgram(ex8);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 8: " + e.getMessage());
+    }
 
     // Example 9: Combined test - heap, while, and garbage collection
     // Ref int v; new(v,0); int i; i=3; while(i>0) (new(v, rH(v)+1); i=i-1); print(rH(v))
@@ -205,7 +238,11 @@ void main() {
 
     ArrayListRepository repo9 = new ArrayListRepository("log9.txt");
     Controller ctr9 = new Controller(repo9);
-    ctr9.addNewProgram(ex9);
+    try {
+        ctr9.addNewProgram(ex9);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 9: " + e.getMessage());
+    }
 
     // Example 10: Demonstrație clară Garbage Collector - arată cum se șterg adresele nefolosite
     // Creăm mai multe obiecte în heap și apoi le facem inaccesibile pentru a vedea GC în acțiune
@@ -255,7 +292,11 @@ void main() {
 
     ArrayListRepository repo10 = new ArrayListRepository("log10.txt");
     Controller ctr10 = new Controller(repo10);
-    ctr10.addNewProgram(ex10);
+    try {
+        ctr10.addNewProgram(ex10);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 10: " + e.getMessage());
+    }
 
     // Example 11: Fork statement - concurrent execution
     // int v; Ref int a; v=10; new(a,22);
@@ -284,7 +325,11 @@ void main() {
 
     ArrayListRepository repo11 = new ArrayListRepository("log11.txt");
     Controller ctr11 = new Controller(repo11);
-    ctr11.addNewProgram(ex11);
+    try {
+        ctr11.addNewProgram(ex11);
+    } catch (MyException e) {
+        System.err.println("Type checking failed for example 11: " + e.getMessage());
+    }
 
     TextMenu menu = new TextMenu();
     menu.addCommand(new ExitCommand("0", "exit"));

@@ -1,7 +1,11 @@
 package model.expression;
 
+import exceptions.MyException;
 import model.state.Heap;
 import model.state.SymbolTable;
+import model.type.RefType;
+import model.type.Type;
+import model.utils.MyIDictionary;
 import model.value.RefValue;
 import model.value.Value;
 
@@ -22,6 +26,17 @@ public record ReadHeapExpression(Expression expression) implements Expression {
         }
 
         return heap.get(address);
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typ = expression.typecheck(typeEnv);
+        if (typ instanceof RefType) {
+            RefType reft = (RefType) typ;
+            return reft.getInner();
+        } else {
+            throw new MyException("the rH argument is not a Ref Type");
+        }
     }
 
     @Override

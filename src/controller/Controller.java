@@ -3,6 +3,9 @@ package controller;
 import exceptions.MyException;
 import model.state.*;
 import model.statement.Statement;
+import model.type.Type;
+import model.utils.MyDictionary;
+import model.utils.MyIDictionary;
 import model.value.RefValue;
 import model.value.Value;
 import repository.Repository;
@@ -22,7 +25,12 @@ public class Controller {
         this.repository = repository;
     }
 
-    public void addNewProgram(Statement program) {
+    public void addNewProgram(Statement program) throws MyException {
+        // Type check the program before creating the ProgramState
+        MyIDictionary<String, Type> typeEnv = new MyDictionary<>();
+        program.typecheck(typeEnv);
+
+        // If type checking passes, create the ProgramState
         var executionStack = new LinkedListExecutionStack();
         executionStack.push(program);
 
@@ -73,7 +81,7 @@ public class Controller {
                 .collect(Collectors.toList());
 
         // Start the execution of the callables
-        // It returns the list of new created PrgStates (namely threads)
+        // returnam o lista de prg statementuri
         List<ProgramState> newPrgList;
         try {
             newPrgList = executor.invokeAll(callList).stream()
@@ -131,12 +139,10 @@ public class Controller {
         repository.setPrgList(prgList);
     }
 
-    // Old method for backwards compatibility - executes sequentially
     public void executeAllSteps() throws MyException {
         allStep();
     }
 
-    // Conservative garbage collector that works with multiple program states
     private void conservativeGarbageCollector(List<ProgramState> prgList) {
         if (prgList.isEmpty()) return;
 
@@ -173,7 +179,6 @@ public class Controller {
                 .collect(Collectors.toList());
     }
 
-    // Safe garbage collector implementation
     private Map<Integer, Value> safeGarbageCollector(List<Integer> symTableAddr, Map<Integer, Value> heap) {
         // Start with addresses from SymTable
         Set<Integer> reachableAddresses = new HashSet<>(symTableAddr);

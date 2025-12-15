@@ -1,8 +1,11 @@
 package model.statement;
 
+import exceptions.MyException;
 import model.expression.Expression;
 import model.state.ProgramState;
 import model.type.RefType;
+import model.type.Type;
+import model.utils.MyIDictionary;
 import model.value.RefValue;
 import model.value.Value;
 
@@ -41,6 +44,17 @@ public record NewStatement(String varName, Expression expression) implements Sta
         state.symbolTable().setValue(varName, newRefValue);
 
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typevar = typeEnv.lookup(varName);
+        Type typexp = expression.typecheck(typeEnv);
+        if (typevar.equals(new RefType(typexp))) {
+            return typeEnv;
+        } else {
+            throw new MyException("NEW stmt: right hand side and left hand side have different types");
+        }
     }
 
     @Override

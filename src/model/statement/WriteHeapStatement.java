@@ -1,8 +1,11 @@
 package model.statement;
 
+import exceptions.MyException;
 import model.expression.Expression;
 import model.state.ProgramState;
 import model.type.RefType;
+import model.type.Type;
+import model.utils.MyIDictionary;
 import model.value.RefValue;
 import model.value.Value;
 
@@ -45,6 +48,21 @@ public record WriteHeapStatement(String varName, Expression expression) implemen
         state.heap().update(address, expressionValue);
 
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typevar = typeEnv.lookup(varName);
+        Type typexp = expression.typecheck(typeEnv);
+        if (typevar instanceof RefType refType) {
+            if (refType.getInner().equals(typexp)) {
+                return typeEnv;
+            } else {
+                throw new MyException("WriteHeap stmt: right hand side and left hand side have different types");
+            }
+        } else {
+            throw new MyException("WriteHeap stmt: variable is not a RefType");
+        }
     }
 
     @Override

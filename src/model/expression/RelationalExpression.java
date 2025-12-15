@@ -1,7 +1,12 @@
 package model.expression;
 
+import exceptions.MyException;
 import model.state.Heap;
 import model.state.SymbolTable;
+import model.type.BooleanType;
+import model.type.IntegerType;
+import model.type.Type;
+import model.utils.MyIDictionary;
 import model.value.BoolValue;
 import model.value.IntValue;
 import model.value.Value;
@@ -31,6 +36,23 @@ public record RelationalExpression(
             case ">=" -> new BoolValue(leftTerm >= rightTerm);
             default -> throw new ArithmeticException("RelationalExpression: unknown operator " + operator);
         };
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typ1, typ2;
+        typ1 = left.typecheck(typeEnv);
+        typ2 = right.typecheck(typeEnv);
+
+        if (typ1.equals(new IntegerType())) {
+            if (typ2.equals(new IntegerType())) {
+                return new BooleanType();
+            } else {
+                throw new MyException("RelationalExpression: second operand is not an integer");
+            }
+        } else {
+            throw new MyException("RelationalExpression: first operand is not an integer");
+        }
     }
 
     @Override

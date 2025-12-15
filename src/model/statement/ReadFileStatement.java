@@ -1,9 +1,12 @@
 package model.statement;
 
+import exceptions.MyException;
 import model.expression.Expression;
 import model.state.ProgramState;
 import model.type.IntegerType;
 import model.type.StringType;
+import model.type.Type;
+import model.utils.MyIDictionary;
 import model.value.IntValue;
 import model.value.StringValue;
 import model.value.Value;
@@ -53,6 +56,19 @@ public record ReadFileStatement(Expression fileNameExpression, String variableNa
         }
 
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typexp = fileNameExpression.typecheck(typeEnv);
+        if (!typexp.equals(new StringType())) {
+            throw new MyException("ReadFile: expression is not a string");
+        }
+        Type typevar = typeEnv.lookup(variableName);
+        if (!typevar.equals(new IntegerType())) {
+            throw new MyException("ReadFile: variable is not of type int");
+        }
+        return typeEnv;
     }
 
     @Override

@@ -1,7 +1,11 @@
 package model.expression;
 
+import exceptions.MyException;
 import model.state.Heap;
 import model.state.SymbolTable;
+import model.type.BooleanType;
+import model.type.Type;
+import model.utils.MyIDictionary;
 import model.value.BoolValue;
 import model.value.Value;
 
@@ -25,6 +29,23 @@ public record LogicExpression(
             case "||" -> new BoolValue(leftTerm || rightTerm);
             default -> throw new ArithmeticException("Unknown operator");
         };
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typ1, typ2;
+        typ1 = first.typecheck(typeEnv);
+        typ2 = second.typecheck(typeEnv);
+
+        if (typ1.equals(new BooleanType())) {
+            if (typ2.equals(new BooleanType())) {
+                return new BooleanType();
+            } else {
+                throw new MyException("second operand is not a boolean");
+            }
+        } else {
+            throw new MyException("first operand is not a boolean");
+        }
     }
 
     @Override
