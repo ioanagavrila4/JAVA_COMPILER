@@ -50,6 +50,17 @@ public class Controller {
         }
     }
 
+    // Getter for program states
+    //pt gui
+    public List<ProgramState> getProgramStates() {
+        return repository.getPrgList();
+    }
+
+    // Setter for program states
+    public void setProgramStates(List<ProgramState> prgList) {
+        repository.setPrgList(prgList);
+    }
+
     // Remove completed programs from the list
     private List<ProgramState> removeCompletedPrg(List<ProgramState> inPrgList) {
         return inPrgList.stream()
@@ -58,7 +69,13 @@ public class Controller {
     }
 
     // Execute one step for all programs concurrently
-    private void oneStepForAllPrg(List<ProgramState> prgList) throws MyException {
+    //schimbare gui: sa fie publice:))))
+    public void oneStepForAllPrg(List<ProgramState> prgList) throws MyException {
+        // pt gui ca sa verificare si initializare automata
+        if (executor == null) {
+            executor = Executors.newFixedThreadPool(2);
+        }
+
         // Before execution, print the PrgState List into the log file
         prgList.forEach(prg -> {
             try {
@@ -143,7 +160,14 @@ public class Controller {
         allStep();
     }
 
-    private void conservativeGarbageCollector(List<ProgramState> prgList) {
+    // Method to shutdown executor when done
+    public void shutdownExecutor() {
+        if (executor != null && !executor.isShutdown()) {
+            executor.shutdownNow();
+        }
+    }
+
+    public void conservativeGarbageCollector(List<ProgramState> prgList) {
         if (prgList.isEmpty()) return;
 
         // Get all addresses from all symbol tables

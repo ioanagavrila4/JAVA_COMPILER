@@ -14,6 +14,11 @@ public class ArrayListOut implements Out {
     }
 
     @Override
+    public List<Value> getContent() {
+        return new ArrayList<>(values);
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Value value : values) {

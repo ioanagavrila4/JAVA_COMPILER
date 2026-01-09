@@ -1,6 +1,7 @@
 package model.state;
 
 import model.statement.Statement;
+import java.util.List;
 
 public interface ExecutionStack {
     void push(Statement statement);
@@ -8,4 +9,6 @@ public interface ExecutionStack {
     Statement pop();
 
     boolean isEmpty();
+
+    List<Statement> toList();
 }

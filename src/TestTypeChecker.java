@@ -10,8 +10,7 @@ import repository.ArrayListRepository;
 
 public class TestTypeChecker {
     public static void main(String[] args) {
-        System.out.println("Testing Type Checker Implementation...\n");
-
+        
         // Test 1: Valid program (should pass)
         System.out.println("Test 1: Valid program (int v; v=2; print(v))");
         Statement valid = new CompoundStatement(
@@ -24,9 +23,9 @@ public class TestTypeChecker {
         Controller ctr1 = new Controller(repo1);
         try {
             ctr1.addNewProgram(valid);
-            System.out.println("✓ Type checking PASSED - Program is well-typed\n");
+            System.out.println("Type checking PASSED - Program is well-typed\n");
         } catch (MyException e) {
-            System.out.println("✗ Type checking FAILED: " + e.getMessage() + "\n");
+            System.out.println("Type checking FAILED: " + e.getMessage() + "\n");
         }
 
         // Test 2: Type error - assigning boolean to int variable
@@ -39,9 +38,9 @@ public class TestTypeChecker {
         Controller ctr2 = new Controller(repo2);
         try {
             ctr2.addNewProgram(typeError1);
-            System.out.println("✗ UNEXPECTED: Type checking passed but should have failed!\n");
+            System.out.println("UNEXPECTED: Type checking passed but should have failed!\n");
         } catch (MyException e) {
-            System.out.println("✓ Type checking correctly FAILED: " + e.getMessage() + "\n");
+            System.out.println("Type checking correctly FAILED: " + e.getMessage() + "\n");
         }
 
         // Test 3: Type error - using undefined variable
@@ -52,9 +51,9 @@ public class TestTypeChecker {
         Controller ctr3 = new Controller(repo3);
         try {
             ctr3.addNewProgram(typeError2);
-            System.out.println("✗ UNEXPECTED: Type checking passed but should have failed!\n");
+            System.out.println("UNEXPECTED: Type checking passed but should have failed!\n");
         } catch (MyException e) {
-            System.out.println("✓ Type checking correctly FAILED: " + e.getMessage() + "\n");
+            System.out.println("Type checking correctly FAILED: " + e.getMessage() + "\n");
         }
 
         // Test 4: Type error - if condition not boolean
@@ -70,9 +69,9 @@ public class TestTypeChecker {
         Controller ctr4 = new Controller(repo4);
         try {
             ctr4.addNewProgram(typeError3);
-            System.out.println("✗ UNEXPECTED: Type checking passed but should have failed!\n");
+            System.out.println("UNEXPECTED: Type checking passed but should have failed!\n");
         } catch (MyException e) {
-            System.out.println("✓ Type checking correctly FAILED: " + e.getMessage() + "\n");
+            System.out.println(" Type checking correctly FAILED: " + e.getMessage() + "\n");
         }
 
         // Test 5: Type error - arithmetic with boolean
@@ -87,9 +86,9 @@ public class TestTypeChecker {
         Controller ctr5 = new Controller(repo5);
         try {
             ctr5.addNewProgram(typeError4);
-            System.out.println("✗ UNEXPECTED: Type checking passed but should have failed!\n");
+            System.out.println(" UNEXPECTED: Type checking passed but should have failed!\n");
         } catch (MyException e) {
-            System.out.println("✓ Type checking correctly FAILED: " + e.getMessage() + "\n");
+            System.out.println("Type checking correctly FAILED: " + e.getMessage() + "\n");
         }
 
         // Test 6: Valid complex program with while
@@ -115,9 +114,9 @@ public class TestTypeChecker {
         Controller ctr6 = new Controller(repo6);
         try {
             ctr6.addNewProgram(valid2);
-            System.out.println("✓ Type checking PASSED - Program is well-typed\n");
+            System.out.println(" Type checking PASSED - Program is well-typed\n");
         } catch (MyException e) {
-            System.out.println("✗ Type checking FAILED: " + e.getMessage() + "\n");
+            System.out.println(" Type checking FAILED: " + e.getMessage() + "\n");
         }
 
         System.out.println("=== Type Checker Testing Complete ===");

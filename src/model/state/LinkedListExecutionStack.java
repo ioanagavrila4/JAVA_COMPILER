@@ -27,6 +27,11 @@ public class LinkedListExecutionStack implements ExecutionStack {
     }
 
     @Override
+    public List<Statement> toList() {
+        return new LinkedList<>(statements);
+    } //pt gui
+
+    @Override
     public String toString() {
         return "ExecutionStack" + statements;
     }

@@ -1,0 +1,210 @@
+Id=1
+ExeStack:
+(ref(int) v;(new(v, 20);(print(rH(v));(wH(v, 30);print((rH(v)+5))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(new(v, 20);(print(rH(v));(wH(v, 30);print((rH(v)+5)))))
+ref(int) v
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(new(v, 20);(print(rH(v));(wH(v, 30);print((rH(v)+5)))))
+ref(int) v
+SymTable:
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(new(v, 20);(print(rH(v));(wH(v, 30);print((rH(v)+5)))))
+SymTable:
+v --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(new(v, 20);(print(rH(v));(wH(v, 30);print((rH(v)+5)))))
+SymTable:
+v --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(print(rH(v));(wH(v, 30);print((rH(v)+5))))
+new(v, 20)
+SymTable:
+v --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(print(rH(v));(wH(v, 30);print((rH(v)+5))))
+new(v, 20)
+SymTable:
+v --> (0, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  (empty)
+
+Id=1
+ExeStack:
+(print(rH(v));(wH(v, 30);print((rH(v)+5))))
+SymTable:
+v --> (1, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 20
+
+Id=1
+ExeStack:
+(print(rH(v));(wH(v, 30);print((rH(v)+5))))
+SymTable:
+v --> (1, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 20
+
+Id=1
+ExeStack:
+(wH(v, 30);print((rH(v)+5)))
+print(rH(v))
+SymTable:
+v --> (1, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 20
+
+Id=1
+ExeStack:
+(wH(v, 30);print((rH(v)+5)))
+print(rH(v))
+SymTable:
+v --> (1, int)
+Out:
+FileTable:
+Heap:
+Heap:
+  1 -> 20
+
+Id=1
+ExeStack:
+(wH(v, 30);print((rH(v)+5)))
+SymTable:
+v --> (1, int)
+Out:
+20
+FileTable:
+Heap:
+Heap:
+  1 -> 20
+
+Id=1
+ExeStack:
+(wH(v, 30);print((rH(v)+5)))
+SymTable:
+v --> (1, int)
+Out:
+20
+FileTable:
+Heap:
+Heap:
+  1 -> 20
+
+Id=1
+ExeStack:
+print((rH(v)+5))
+wH(v, 30)
+SymTable:
+v --> (1, int)
+Out:
+20
+FileTable:
+Heap:
+Heap:
+  1 -> 20
+
+Id=1
+ExeStack:
+print((rH(v)+5))
+wH(v, 30)
+SymTable:
+v --> (1, int)
+Out:
+20
+FileTable:
+Heap:
+Heap:
+  1 -> 20
+
+Id=1
+ExeStack:
+print((rH(v)+5))
+SymTable:
+v --> (1, int)
+Out:
+20
+FileTable:
+Heap:
+Heap:
+  1 -> 30
+
+Id=1
+ExeStack:
+print((rH(v)+5))
+SymTable:
+v --> (1, int)
+Out:
+20
+FileTable:
+Heap:
+Heap:
+  1 -> 30
+
+Id=1
+ExeStack:
+SymTable:
+v --> (1, int)
+Out:
+20
+35
+FileTable:
+Heap:
+Heap:
+  1 -> 30
+

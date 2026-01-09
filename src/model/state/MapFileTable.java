@@ -39,6 +39,11 @@ public class MapFileTable implements FileTable {
     }
 
     @Override
+    public Map<StringValue, BufferedReader> getContent() {
+        return new HashMap<>(fileTable);
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (StringValue fileName : fileTable.keySet()) {
