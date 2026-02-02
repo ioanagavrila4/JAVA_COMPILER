@@ -11,13 +11,26 @@ public class ProgramState {
     private final Out out;
     private final FileTable fileTable;
     private final Heap heap;
+    private final BarrierTable barrierTable;
 
     // Static synchronized method to generate unique IDs
     private static synchronized int generateId() {
         return ++nextId;
     }
 
-    // Constructor for initial program state
+    // Constructor for initial program state with BarrierTable
+    public ProgramState(ExecutionStack executionStack, SymbolTable symbolTable,
+                       Out out, FileTable fileTable, Heap heap, BarrierTable barrierTable) {
+        this.id = generateId();
+        this.executionStack = executionStack;
+        this.symbolTable = symbolTable;
+        this.out = out;
+        this.fileTable = fileTable;
+        this.heap = heap;
+        this.barrierTable = barrierTable;
+    }
+
+    // Constructor for initial program state (backward compatibility)
     public ProgramState(ExecutionStack executionStack, SymbolTable symbolTable,
                        Out out, FileTable fileTable, Heap heap) {
         this.id = generateId();
@@ -26,6 +39,7 @@ public class ProgramState {
         this.out = out;
         this.fileTable = fileTable;
         this.heap = heap;
+        this.barrierTable = new MapBarrierTable();
     }
 
     // Constructor for forked program state with specific id
@@ -37,6 +51,19 @@ public class ProgramState {
         this.out = out;
         this.fileTable = fileTable;
         this.heap = heap;
+        this.barrierTable = new MapBarrierTable();
+    }
+
+    // Constructor for forked program state with specific id and BarrierTable
+    public ProgramState(ExecutionStack executionStack, SymbolTable symbolTable,
+                       Out out, FileTable fileTable, Heap heap, BarrierTable barrierTable, int id) {
+        this.id = id;
+        this.executionStack = executionStack;
+        this.symbolTable = symbolTable;
+        this.out = out;
+        this.fileTable = fileTable;
+        this.heap = heap;
+        this.barrierTable = barrierTable;
     }
 
     // Getters
@@ -64,6 +91,10 @@ public class ProgramState {
         return heap;
     }
 
+    public BarrierTable barrierTable() {
+        return barrierTable;
+    }
+
     // Check if program is not completed
     public boolean isNotCompleted() {
         return !executionStack.isEmpty();
@@ -85,6 +116,7 @@ public class ProgramState {
                "SymTable:\n" + symbolTable.toString() + "\n" +
                "Out:\n" + out.toString() + "\n" +
                "FileTable:\n" + fileTable.toString() + "\n" +
-               "Heap:\n" + heap.toString() + "\n";
+               "Heap:\n" + heap.toString() + "\n" +
+               "BarrierTable:\n" + barrierTable.toString() + "\n";
     }
 }

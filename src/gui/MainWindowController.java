@@ -53,6 +53,18 @@ public class MainWindowController {
     @FXML
     private Button runOneStepButton;
 
+    @FXML
+    private TableView<BarrierEntry> barrierTableView;
+
+    @FXML
+    private TableColumn<BarrierEntry, Integer> barrierIndexColumn;
+
+    @FXML
+    private TableColumn<BarrierEntry, Integer> barrierValueColumn;
+
+    @FXML
+    private TableColumn<BarrierEntry, String> barrierListColumn;
+
     private Controller controller;
 
     // Keep references to shared components for display after completion
@@ -67,6 +79,11 @@ public class MainWindowController {
         // Initialize symbol table columns
         symVariableNameColumn.setCellValueFactory(new PropertyValueFactory<>("variableName"));
         symValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+
+        // Initialize barrier table columns
+        barrierIndexColumn.setCellValueFactory(new PropertyValueFactory<>("index"));
+        barrierValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+        barrierListColumn.setCellValueFactory(new PropertyValueFactory<>("list"));
 
         // Set up program state selection listener
         prgStateIdentifiersListView.getSelectionModel().selectedItemProperty().addListener(
@@ -130,6 +147,9 @@ public class MainWindowController {
 
             // Update file table
             updateFileTable(stateForSharedComponents);
+
+            // Update barrier table
+            updateBarrierTable(stateForSharedComponents);
         }
 
         // Update selected program state details
@@ -164,6 +184,20 @@ public class MainWindowController {
             fileNames.add(fileName.getVal());
         }
         fileTableListView.setItems(FXCollections.observableArrayList(fileNames));
+    }
+
+    private void updateBarrierTable(ProgramState prgState) {
+        ObservableList<BarrierEntry> barrierEntries = FXCollections.observableArrayList();
+        Map<Integer, Map.Entry<Integer, List<Integer>>> barrierContent = prgState.barrierTable().getContent();
+
+        for (Map.Entry<Integer, Map.Entry<Integer, List<Integer>>> entry : barrierContent.entrySet()) {
+            int index = entry.getKey();
+            int value = entry.getValue().getKey();
+            String list = entry.getValue().getValue().toString();
+            barrierEntries.add(new BarrierEntry(index, value, list));
+        }
+
+        barrierTableView.setItems(barrierEntries);
     }
 
     private void updateSelectedProgramState(Integer prgId) {
@@ -304,6 +338,31 @@ public class MainWindowController {
 
         public String getValue() {
             return value.get();
+        }
+    }
+
+    // Helper class for barrier table
+    public static class BarrierEntry {
+        private final SimpleIntegerProperty index;
+        private final SimpleIntegerProperty value;
+        private final SimpleStringProperty list;
+
+        public BarrierEntry(int index, int value, String list) {
+            this.index = new SimpleIntegerProperty(index);
+            this.value = new SimpleIntegerProperty(value);
+            this.list = new SimpleStringProperty(list);
+        }
+
+        public int getIndex() {
+            return index.get();
+        }
+
+        public int getValue() {
+            return value.get();
+        }
+
+        public String getList() {
+            return list.get();
         }
     }
 }

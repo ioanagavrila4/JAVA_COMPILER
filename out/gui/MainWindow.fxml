@@ -42,7 +42,16 @@
                 <ListView fx:id="outListView" prefHeight="200" prefWidth="300"/>
 
                 <Label text="File Table" style="-fx-font-weight: bold;"/>
-                <ListView fx:id="fileTableListView" prefHeight="150" prefWidth="300"/>
+                <ListView fx:id="fileTableListView" prefHeight="100" prefWidth="300"/>
+
+                <Label text="Barrier Table" style="-fx-font-weight: bold;"/>
+                <TableView fx:id="barrierTableView" prefHeight="150" prefWidth="300">
+                    <columns>
+                        <TableColumn fx:id="barrierIndexColumn" text="Index" prefWidth="60"/>
+                        <TableColumn fx:id="barrierValueColumn" text="Value" prefWidth="60"/>
+                        <TableColumn fx:id="barrierListColumn" text="List" prefWidth="180"/>
+                    </columns>
+                </TableView>
             </VBox>
 
             <!-- Column 1: Program State IDs and Symbol Table -->

@@ -260,6 +260,112 @@ public class ProgramSelectionController {
                                                         new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))))))));
         programList.add(new ProgramWrapper(ex11, "Example 11: Fork - concurrent execution"));
 
+        // Exam Program 1: RepeatUntil statement test
+        // int v; int x; int y; v=0;
+        // (repeat (fork(print(v);v=v-1);v=v+1) until v==3);
+        // x=1;nop;y=3;nop;
+        // print(v*10)
+        // Expected output: {0,1,2,30}
+        Statement examProgram1 = new CompoundStatement(
+                new VariableDeclarationStatement(new IntegerType(), "v"),
+                new CompoundStatement(
+                        new VariableDeclarationStatement(new IntegerType(), "x"),
+                        new CompoundStatement(
+                                new VariableDeclarationStatement(new IntegerType(), "y"),
+                                new CompoundStatement(
+                                        new AssignmentStatement("v", new ValueExpression(new IntValue(0))),
+                                        new CompoundStatement(
+                                                new RepeatUntilStatement(
+                                                        new CompoundStatement(
+                                                                new ForkStatement(
+                                                                        new CompoundStatement(
+                                                                                new PrintStatement(new VariableExpression("v")),
+                                                                                new AssignmentStatement("v",
+                                                                                        new ArithmeticExpression(
+                                                                                                new VariableExpression("v"),
+                                                                                                new ValueExpression(new IntValue(1)),
+                                                                                                '-')))),
+                                                                new AssignmentStatement("v",
+                                                                        new ArithmeticExpression(
+                                                                                new VariableExpression("v"),
+                                                                                new ValueExpression(new IntValue(1)),
+                                                                                '+'))),
+                                                        new RelationalExpression(
+                                                                new VariableExpression("v"),
+                                                                new ValueExpression(new IntValue(3)),
+                                                                "==")),
+                                                new CompoundStatement(
+                                                        new AssignmentStatement("x", new ValueExpression(new IntValue(1))),
+                                                        new CompoundStatement(
+                                                                new NoOperationStatement(),
+                                                                new CompoundStatement(
+                                                                        new AssignmentStatement("y", new ValueExpression(new IntValue(3))),
+                                                                        new CompoundStatement(
+                                                                                new NoOperationStatement(),
+                                                                                new PrintStatement(
+                                                                                        new ArithmeticExpression(
+                                                                                                new VariableExpression("v"),
+                                                                                                new ValueExpression(new IntValue(10)),
+                                                                                                '*')))))))))));
+        programList.add(new ProgramWrapper(examProgram1, "Exam 1: RepeatUntil - Expected output: {0,1,2,30}"));
+
+        // Exam Program 2: CyclicBarrier test
+        // Ref int v1; Ref int v2; Ref int v3; int cnt;
+        // new(v1,2);new(v2,3);new(v3,4);newBarrier(cnt,rH(v2));
+        // fork( await(cnt);wh(v1,rh(v1)*10);print(rh(v1)) );
+        // fork( await(cnt);wh(v2,rh(v2)*10);wh(v2,rh(v2)*10);print(rh(v2)) );
+        // await(cnt);
+        // print(rH(v3))
+        // Expected output: {4,20,300}
+        Statement examProgram2 = new CompoundStatement(
+                new VariableDeclarationStatement(new RefType(new IntegerType()), "v1"),
+                new CompoundStatement(
+                        new VariableDeclarationStatement(new RefType(new IntegerType()), "v2"),
+                        new CompoundStatement(
+                                new VariableDeclarationStatement(new RefType(new IntegerType()), "v3"),
+                                new CompoundStatement(
+                                        new VariableDeclarationStatement(new IntegerType(), "cnt"),
+                                        new CompoundStatement(
+                                                new NewStatement("v1", new ValueExpression(new IntValue(2))),
+                                                new CompoundStatement(
+                                                        new NewStatement("v2", new ValueExpression(new IntValue(3))),
+                                                        new CompoundStatement(
+                                                                new NewStatement("v3", new ValueExpression(new IntValue(4))),
+                                                                new CompoundStatement(
+                                                                        new NewBarrierStatement("cnt", new ReadHeapExpression(new VariableExpression("v2"))),
+                                                                        new CompoundStatement(
+                                                                                new ForkStatement(
+                                                                                        new CompoundStatement(
+                                                                                                new AwaitStatement("cnt"),
+                                                                                                new CompoundStatement(
+                                                                                                        new WriteHeapStatement("v1",
+                                                                                                                new ArithmeticExpression(
+                                                                                                                        new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                                                        new ValueExpression(new IntValue(10)),
+                                                                                                                        '*')),
+                                                                                                        new PrintStatement(new ReadHeapExpression(new VariableExpression("v1")))))),
+                                                                                new CompoundStatement(
+                                                                                        new ForkStatement(
+                                                                                                new CompoundStatement(
+                                                                                                        new AwaitStatement("cnt"),
+                                                                                                        new CompoundStatement(
+                                                                                                                new WriteHeapStatement("v2",
+                                                                                                                        new ArithmeticExpression(
+                                                                                                                                new ReadHeapExpression(new VariableExpression("v2")),
+                                                                                                                                new ValueExpression(new IntValue(10)),
+                                                                                                                                '*')),
+                                                                                                                new CompoundStatement(
+                                                                                                                        new WriteHeapStatement("v2",
+                                                                                                                                new ArithmeticExpression(
+                                                                                                                                        new ReadHeapExpression(new VariableExpression("v2")),
+                                                                                                                                        new ValueExpression(new IntValue(10)),
+                                                                                                                                        '*')),
+                                                                                                                        new PrintStatement(new ReadHeapExpression(new VariableExpression("v2"))))))),
+                                                                                        new CompoundStatement(
+                                                                                                new AwaitStatement("cnt"),
+                                                                                                new PrintStatement(new ReadHeapExpression(new VariableExpression("v3"))))))))))))));
+        programList.add(new ProgramWrapper(examProgram2, "Exam 2: CyclicBarrier - Expected output: {4,20,300}"));
+
         return programList;
     }
 
