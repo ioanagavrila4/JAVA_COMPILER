@@ -51,6 +51,15 @@ public class MainWindowController {
     private ListView<String> exeStackListView;
 
     @FXML
+    private TableView<LockEntry> lockTableView;
+
+    @FXML
+    private TableColumn<LockEntry, Integer> lockLocationColumn;
+
+    @FXML
+    private TableColumn<LockEntry, String> lockValueColumn;
+
+    @FXML
     private Button runOneStepButton;
 
     private Controller controller;
@@ -63,6 +72,10 @@ public class MainWindowController {
         // Initialize heap table columns
         heapAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         heapValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+
+        // Initialize lock table columns
+        lockLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        lockValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 
         // Initialize symbol table columns
         symVariableNameColumn.setCellValueFactory(new PropertyValueFactory<>("variableName"));
@@ -130,6 +143,9 @@ public class MainWindowController {
 
             // Update file table
             updateFileTable(stateForSharedComponents);
+
+            // Update lock table
+            updateLockTable(stateForSharedComponents);
         }
 
         // Update selected program state details
@@ -164,6 +180,18 @@ public class MainWindowController {
             fileNames.add(fileName.getVal());
         }
         fileTableListView.setItems(FXCollections.observableArrayList(fileNames));
+    }
+
+    private void updateLockTable(ProgramState prgState) {
+        ObservableList<LockEntry> lockEntries = FXCollections.observableArrayList();
+        Map<Integer, Integer> lockContent = prgState.lockTable().getContent();
+
+        for (Map.Entry<Integer, Integer> entry : lockContent.entrySet()) {
+            String value = entry.getValue() == -1 ? "free" : String.valueOf(entry.getValue());
+            lockEntries.add(new LockEntry(entry.getKey(), value));
+        }
+
+        lockTableView.setItems(lockEntries);
     }
 
     private void updateSelectedProgramState(Integer prgId) {
@@ -300,6 +328,25 @@ public class MainWindowController {
 
         public String getVariableName() {
             return variableName.get();
+        }
+
+        public String getValue() {
+            return value.get();
+        }
+    }
+
+    // Helper class for lock table
+    public static class LockEntry {
+        private final SimpleIntegerProperty location;
+        private final SimpleStringProperty value;
+
+        public LockEntry(int location, String value) {
+            this.location = new SimpleIntegerProperty(location);
+            this.value = new SimpleStringProperty(value);
+        }
+
+        public int getLocation() {
+            return location.get();
         }
 
         public String getValue() {

@@ -28,7 +28,8 @@ public class ForkStatement implements Statement {
             newSymTable,
             state.out(),        // Shared
             state.fileTable(),  // Shared
-            state.heap()        // Shared
+            state.heap(),       // Shared
+            state.lockTable()   // Shared
         );
 
         // Return the new created PrgState

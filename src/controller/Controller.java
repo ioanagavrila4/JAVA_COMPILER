@@ -39,7 +39,8 @@ public class Controller {
                 new MapSymbolTable(),
                 new ArrayListOut(),
                 new MapFileTable(),
-                new MapHeap()
+                new MapHeap(),
+                new MapLockTable()
         ));
     }
 
