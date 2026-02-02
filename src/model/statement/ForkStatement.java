@@ -26,9 +26,10 @@ public class ForkStatement implements Statement {
         ProgramState newPrgState = new ProgramState(
             newStack,
             newSymTable,
-            state.out(),        // Shared
-            state.fileTable(),  // Shared
-            state.heap()        // Shared
+            state.out(),            // Shared
+            state.fileTable(),      // Shared
+            state.heap(),           // Shared
+            state.semaphoreTable()  // Shared
         );
 
         // Return the new created PrgState

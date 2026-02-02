@@ -260,6 +260,106 @@ public class ProgramSelectionController {
                                                         new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))))))));
         programList.add(new ProgramWrapper(ex11, "Example 11: Fork - concurrent execution"));
 
+        // Example 12: Switch statement test (Problem 1)
+        // int a; int b; int c;
+        // a=1;b=2;c=5;
+        // (switch(a*10)
+        //  (case (b*c) : print(a);print(b))
+        //  (case (10) : print(100);print(200))
+        //  (default : print(300)));
+        // print(300)
+        Statement ex12 = new CompoundStatement(
+                new VariableDeclarationStatement(new IntegerType(), "a"),
+                new CompoundStatement(
+                        new VariableDeclarationStatement(new IntegerType(), "b"),
+                        new CompoundStatement(
+                                new VariableDeclarationStatement(new IntegerType(), "c"),
+                                new CompoundStatement(
+                                        new AssignmentStatement("a", new ValueExpression(new IntValue(1))),
+                                        new CompoundStatement(
+                                                new AssignmentStatement("b", new ValueExpression(new IntValue(2))),
+                                                new CompoundStatement(
+                                                        new AssignmentStatement("c", new ValueExpression(new IntValue(5))),
+                                                        new CompoundStatement(
+                                                                new SwitchStatement(
+                                                                        new ArithmeticExpression(
+                                                                                new VariableExpression("a"),
+                                                                                new ValueExpression(new IntValue(10)),
+                                                                                '*'),
+                                                                        new ArithmeticExpression(
+                                                                                new VariableExpression("b"),
+                                                                                new VariableExpression("c"),
+                                                                                '*'),
+                                                                        new CompoundStatement(
+                                                                                new PrintStatement(new VariableExpression("a")),
+                                                                                new PrintStatement(new VariableExpression("b"))),
+                                                                        new ValueExpression(new IntValue(10)),
+                                                                        new CompoundStatement(
+                                                                                new PrintStatement(new ValueExpression(new IntValue(100))),
+                                                                                new PrintStatement(new ValueExpression(new IntValue(200)))),
+                                                                        new PrintStatement(new ValueExpression(new IntValue(300)))),
+                                                                new PrintStatement(new ValueExpression(new IntValue(300))))))))));
+        programList.add(new ProgramWrapper(ex12, "Example 12: Switch statement (Expected: 1,2,300)"));
+
+        // Example 13: CountSemaphore test (Problem 2)
+        // Ref int v1; int cnt;
+        // new(v1,1);createSemaphore(cnt,rH(v1));
+        // fork(acquire(cnt);wh(v1,rh(v1)*10);print(rh(v1));release(cnt));
+        // fork(acquire(cnt);wh(v1,rh(v1)*10);wh(v1,rh(v1)*2);print(rh(v1));release(cnt));
+        // acquire(cnt);
+        // print(rh(v1)-1);
+        // release(cnt)
+        Statement ex13 = new CompoundStatement(
+                new VariableDeclarationStatement(new RefType(new IntegerType()), "v1"),
+                new CompoundStatement(
+                        new VariableDeclarationStatement(new IntegerType(), "cnt"),
+                        new CompoundStatement(
+                                new NewStatement("v1", new ValueExpression(new IntValue(1))),
+                                new CompoundStatement(
+                                        new CreateSemaphoreStatement("cnt", new ReadHeapExpression(new VariableExpression("v1"))),
+                                        new CompoundStatement(
+                                                new ForkStatement(
+                                                        new CompoundStatement(
+                                                                new AcquireStatement("cnt"),
+                                                                new CompoundStatement(
+                                                                        new WriteHeapStatement("v1",
+                                                                                new ArithmeticExpression(
+                                                                                        new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                        new ValueExpression(new IntValue(10)),
+                                                                                        '*')),
+                                                                        new CompoundStatement(
+                                                                                new PrintStatement(new ReadHeapExpression(new VariableExpression("v1"))),
+                                                                                new ReleaseStatement("cnt"))))),
+                                                new CompoundStatement(
+                                                        new ForkStatement(
+                                                                new CompoundStatement(
+                                                                        new AcquireStatement("cnt"),
+                                                                        new CompoundStatement(
+                                                                                new WriteHeapStatement("v1",
+                                                                                        new ArithmeticExpression(
+                                                                                                new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                                new ValueExpression(new IntValue(10)),
+                                                                                                '*')),
+                                                                                new CompoundStatement(
+                                                                                        new WriteHeapStatement("v1",
+                                                                                                new ArithmeticExpression(
+                                                                                                        new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                                        new ValueExpression(new IntValue(2)),
+                                                                                                        '*')),
+                                                                                        new CompoundStatement(
+                                                                                                new PrintStatement(new ReadHeapExpression(new VariableExpression("v1"))),
+                                                                                                new ReleaseStatement("cnt")))))),
+                                                        new CompoundStatement(
+                                                                new AcquireStatement("cnt"),
+                                                                new CompoundStatement(
+                                                                        new PrintStatement(
+                                                                                new ArithmeticExpression(
+                                                                                        new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                        new ValueExpression(new IntValue(1)),
+                                                                                        '-')),
+                                                                        new ReleaseStatement("cnt")))))))));
+        programList.add(new ProgramWrapper(ex13, "Example 13: CountSemaphore (Expected: 10,200,9 or 10,9,200)"));
+
         return programList;
     }
 

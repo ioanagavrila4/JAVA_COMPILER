@@ -9,8 +9,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 import model.state.Heap;
 import model.state.ProgramState;
+import model.state.SemaphoreTable;
 import model.value.Value;
 
 import java.util.*;
@@ -53,6 +55,18 @@ public class MainWindowController {
     @FXML
     private Button runOneStepButton;
 
+    @FXML
+    private TableView<SemaphoreEntry> semaphoreTableView;
+
+    @FXML
+    private TableColumn<SemaphoreEntry, Integer> semaphoreIndexColumn;
+
+    @FXML
+    private TableColumn<SemaphoreEntry, Integer> semaphoreCountColumn;
+
+    @FXML
+    private TableColumn<SemaphoreEntry, String> semaphoreListColumn;
+
     private Controller controller;
 
     // Keep references to shared components for display after completion
@@ -67,6 +81,11 @@ public class MainWindowController {
         // Initialize symbol table columns
         symVariableNameColumn.setCellValueFactory(new PropertyValueFactory<>("variableName"));
         symValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+
+        // Initialize semaphore table columns
+        semaphoreIndexColumn.setCellValueFactory(new PropertyValueFactory<>("index"));
+        semaphoreCountColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
+        semaphoreListColumn.setCellValueFactory(new PropertyValueFactory<>("waitingList"));
 
         // Set up program state selection listener
         prgStateIdentifiersListView.getSelectionModel().selectedItemProperty().addListener(
@@ -130,6 +149,9 @@ public class MainWindowController {
 
             // Update file table
             updateFileTable(stateForSharedComponents);
+
+            // Update semaphore table
+            updateSemaphoreTable(stateForSharedComponents);
         }
 
         // Update selected program state details
@@ -164,6 +186,22 @@ public class MainWindowController {
             fileNames.add(fileName.getVal());
         }
         fileTableListView.setItems(FXCollections.observableArrayList(fileNames));
+    }
+
+    private void updateSemaphoreTable(ProgramState prgState) {
+        ObservableList<SemaphoreEntry> semaphoreEntries = FXCollections.observableArrayList();
+        Map<Integer, Pair<Integer, List<Integer>>> semaphoreContent = prgState.semaphoreTable().getContent();
+
+        for (Map.Entry<Integer, Pair<Integer, List<Integer>>> entry : semaphoreContent.entrySet()) {
+            int index = entry.getKey();
+            int count = entry.getValue().getKey();
+            List<Integer> waitingList = entry.getValue().getValue();
+            String waitingListStr = waitingList.toString();
+
+            semaphoreEntries.add(new SemaphoreEntry(index, count, waitingListStr));
+        }
+
+        semaphoreTableView.setItems(semaphoreEntries);
     }
 
     private void updateSelectedProgramState(Integer prgId) {
@@ -304,6 +342,31 @@ public class MainWindowController {
 
         public String getValue() {
             return value.get();
+        }
+    }
+
+    // Helper class for semaphore table
+    public static class SemaphoreEntry {
+        private final SimpleIntegerProperty index;
+        private final SimpleIntegerProperty count;
+        private final SimpleStringProperty waitingList;
+
+        public SemaphoreEntry(int index, int count, String waitingList) {
+            this.index = new SimpleIntegerProperty(index);
+            this.count = new SimpleIntegerProperty(count);
+            this.waitingList = new SimpleStringProperty(waitingList);
+        }
+
+        public int getIndex() {
+            return index.get();
+        }
+
+        public int getCount() {
+            return count.get();
+        }
+
+        public String getWaitingList() {
+            return waitingList.get();
         }
     }
 }
