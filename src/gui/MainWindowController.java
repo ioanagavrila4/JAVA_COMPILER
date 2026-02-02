@@ -53,6 +53,15 @@ public class MainWindowController {
     @FXML
     private Button runOneStepButton;
 
+    @FXML
+    private TableView<LatchEntry> latchTableView;
+
+    @FXML
+    private TableColumn<LatchEntry, Integer> latchLocationColumn;
+
+    @FXML
+    private TableColumn<LatchEntry, String> latchValueColumn;
+
     private Controller controller;
 
     // Keep references to shared components for display after completion
@@ -67,6 +76,10 @@ public class MainWindowController {
         // Initialize symbol table columns
         symVariableNameColumn.setCellValueFactory(new PropertyValueFactory<>("variableName"));
         symValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+
+        // Initialize latch table columns
+        latchLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        latchValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 
         // Set up program state selection listener
         prgStateIdentifiersListView.getSelectionModel().selectedItemProperty().addListener(
@@ -130,6 +143,9 @@ public class MainWindowController {
 
             // Update file table
             updateFileTable(stateForSharedComponents);
+
+            // Update latch table
+            updateLatchTable(stateForSharedComponents);
         }
 
         // Update selected program state details
@@ -164,6 +180,17 @@ public class MainWindowController {
             fileNames.add(fileName.getVal());
         }
         fileTableListView.setItems(FXCollections.observableArrayList(fileNames));
+    }
+
+    private void updateLatchTable(ProgramState prgState) {
+        ObservableList<LatchEntry> latchEntries = FXCollections.observableArrayList();
+        Map<Integer, Integer> latchContent = prgState.latchTable().getContent();
+
+        for (Map.Entry<Integer, Integer> entry : latchContent.entrySet()) {
+            latchEntries.add(new LatchEntry(entry.getKey(), entry.getValue().toString()));
+        }
+
+        latchTableView.setItems(latchEntries);
     }
 
     private void updateSelectedProgramState(Integer prgId) {
@@ -300,6 +327,25 @@ public class MainWindowController {
 
         public String getVariableName() {
             return variableName.get();
+        }
+
+        public String getValue() {
+            return value.get();
+        }
+    }
+
+    // Helper class for latch table
+    public static class LatchEntry {
+        private final SimpleIntegerProperty location;
+        private final SimpleStringProperty value;
+
+        public LatchEntry(int location, String value) {
+            this.location = new SimpleIntegerProperty(location);
+            this.value = new SimpleStringProperty(value);
+        }
+
+        public int getLocation() {
+            return location.get();
         }
 
         public String getValue() {

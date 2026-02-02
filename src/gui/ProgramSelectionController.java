@@ -260,6 +260,123 @@ public class ProgramSelectionController {
                                                         new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))))))));
         programList.add(new ProgramWrapper(ex11, "Example 11: Fork - concurrent execution"));
 
+        // EXAM Problem 1: Conditional Assignment Statement
+        // Ref int a; Ref int b; int v;
+        // new(a,0); new(b,0);
+        // wh(a,1); wh(b,2);
+        // v=(rh(a)<rh(b))?100:200;
+        // print(v);
+        // v= ((rh(b)-2)>rh(a))?100:200;
+        // print(v);
+        // The final Out should be {100,200}
+        Statement conditionalAssignmentProgram = new CompoundStatement(
+                new VariableDeclarationStatement(new RefType(new IntegerType()), "a"),
+                new CompoundStatement(
+                        new VariableDeclarationStatement(new RefType(new IntegerType()), "b"),
+                        new CompoundStatement(
+                                new VariableDeclarationStatement(new IntegerType(), "v"),
+                                new CompoundStatement(
+                                        new NewStatement("a", new ValueExpression(new IntValue(0))),
+                                        new CompoundStatement(
+                                                new NewStatement("b", new ValueExpression(new IntValue(0))),
+                                                new CompoundStatement(
+                                                        new WriteHeapStatement("a", new ValueExpression(new IntValue(1))),
+                                                        new CompoundStatement(
+                                                                new WriteHeapStatement("b", new ValueExpression(new IntValue(2))),
+                                                                new CompoundStatement(
+                                                                        new ConditionalAssignmentStatement("v",
+                                                                                new RelationalExpression(
+                                                                                        new ReadHeapExpression(new VariableExpression("a")),
+                                                                                        new ReadHeapExpression(new VariableExpression("b")),
+                                                                                        "<"),
+                                                                                new ValueExpression(new IntValue(100)),
+                                                                                new ValueExpression(new IntValue(200))),
+                                                                        new CompoundStatement(
+                                                                                new PrintStatement(new VariableExpression("v")),
+                                                                                new CompoundStatement(
+                                                                                        new ConditionalAssignmentStatement("v",
+                                                                                                new RelationalExpression(
+                                                                                                        new ArithmeticExpression(
+                                                                                                                new ReadHeapExpression(new VariableExpression("b")),
+                                                                                                                new ValueExpression(new IntValue(2)),
+                                                                                                                '-'),
+                                                                                                        new ReadHeapExpression(new VariableExpression("a")),
+                                                                                                        ">"),
+                                                                                                new ValueExpression(new IntValue(100)),
+                                                                                                new ValueExpression(new IntValue(200))),
+                                                                                        new PrintStatement(new VariableExpression("v"))))))))))));
+        programList.add(new ProgramWrapper(conditionalAssignmentProgram, "EXAM Problem 1: Conditional Assignment (v=exp1?exp2:exp3)"));
+
+        // EXAM Problem 2: CountDownLatch
+        // Ref int v1; Ref int v2; Ref int v3; int cnt;
+        // new(v1,2);new(v2,3);new(v3,4);newLatch(cnt,rH(v2));
+        // fork(wh(v1,rh(v1)*10);print(rh(v1));countDown(cnt);
+        //      fork(wh(v2,rh(v2)*10);print(rh(v2));countDown(cnt);
+        //           fork(wh(v3,rh(v3)*10);print(rh(v3));countDown(cnt))
+        //      )
+        // );
+        // await(cnt);
+        // print(100);
+        // countDown(cnt);
+        // print(100)
+        Statement countDownLatchProgram = new CompoundStatement(
+                new VariableDeclarationStatement(new RefType(new IntegerType()), "v1"),
+                new CompoundStatement(
+                        new VariableDeclarationStatement(new RefType(new IntegerType()), "v2"),
+                        new CompoundStatement(
+                                new VariableDeclarationStatement(new RefType(new IntegerType()), "v3"),
+                                new CompoundStatement(
+                                        new VariableDeclarationStatement(new IntegerType(), "cnt"),
+                                        new CompoundStatement(
+                                                new NewStatement("v1", new ValueExpression(new IntValue(2))),
+                                                new CompoundStatement(
+                                                        new NewStatement("v2", new ValueExpression(new IntValue(3))),
+                                                        new CompoundStatement(
+                                                                new NewStatement("v3", new ValueExpression(new IntValue(4))),
+                                                                new CompoundStatement(
+                                                                        new NewLatchStatement("cnt", new ReadHeapExpression(new VariableExpression("v2"))),
+                                                                        new CompoundStatement(
+                                                                                new ForkStatement(
+                                                                                        new CompoundStatement(
+                                                                                                new WriteHeapStatement("v1",
+                                                                                                        new ArithmeticExpression(
+                                                                                                                new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                                                new ValueExpression(new IntValue(10)),
+                                                                                                                '*')),
+                                                                                                new CompoundStatement(
+                                                                                                        new PrintStatement(new ReadHeapExpression(new VariableExpression("v1"))),
+                                                                                                        new CompoundStatement(
+                                                                                                                new CountDownStatement("cnt"),
+                                                                                                                new ForkStatement(
+                                                                                                                        new CompoundStatement(
+                                                                                                                                new WriteHeapStatement("v2",
+                                                                                                                                        new ArithmeticExpression(
+                                                                                                                                                new ReadHeapExpression(new VariableExpression("v2")),
+                                                                                                                                                new ValueExpression(new IntValue(10)),
+                                                                                                                                                '*')),
+                                                                                                                                new CompoundStatement(
+                                                                                                                                        new PrintStatement(new ReadHeapExpression(new VariableExpression("v2"))),
+                                                                                                                                        new CompoundStatement(
+                                                                                                                                                new CountDownStatement("cnt"),
+                                                                                                                                                new ForkStatement(
+                                                                                                                                                        new CompoundStatement(
+                                                                                                                                                                new WriteHeapStatement("v3",
+                                                                                                                                                                        new ArithmeticExpression(
+                                                                                                                                                                                new ReadHeapExpression(new VariableExpression("v3")),
+                                                                                                                                                                                new ValueExpression(new IntValue(10)),
+                                                                                                                                                                                '*')),
+                                                                                                                                                                new CompoundStatement(
+                                                                                                                                                                        new PrintStatement(new ReadHeapExpression(new VariableExpression("v3"))),
+                                                                                                                                                                        new CountDownStatement("cnt")))))))))))),
+                                                                                new CompoundStatement(
+                                                                                        new AwaitStatement("cnt"),
+                                                                                        new CompoundStatement(
+                                                                                                new PrintStatement(new ValueExpression(new IntValue(100))),
+                                                                                                new CompoundStatement(
+                                                                                                        new CountDownStatement("cnt"),
+                                                                                                        new PrintStatement(new ValueExpression(new IntValue(100)))))))))))))));
+        programList.add(new ProgramWrapper(countDownLatchProgram, "EXAM Problem 2: CountDownLatch Mechanism"));
+
         return programList;
     }
 

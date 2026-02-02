@@ -42,7 +42,15 @@
                 <ListView fx:id="outListView" prefHeight="200" prefWidth="300"/>
 
                 <Label text="File Table" style="-fx-font-weight: bold;"/>
-                <ListView fx:id="fileTableListView" prefHeight="150" prefWidth="300"/>
+                <ListView fx:id="fileTableListView" prefHeight="100" prefWidth="300"/>
+
+                <Label text="Latch Table" style="-fx-font-weight: bold;"/>
+                <TableView fx:id="latchTableView" prefHeight="150" prefWidth="300">
+                    <columns>
+                        <TableColumn fx:id="latchLocationColumn" text="Location" prefWidth="100"/>
+                        <TableColumn fx:id="latchValueColumn" text="Value" prefWidth="200"/>
+                    </columns>
+                </TableView>
             </VBox>
 
             <!-- Column 1: Program State IDs and Symbol Table -->
